@@ -45,3 +45,19 @@ Install Libraries: You’ll need the MPU6050 and Servo libraries.
 Tune the PID Gains: Adjust Kp, Ki, and Kd​ for optimal performance. You can start with small values and adjust based on how the rocket responds in test runs.
 Test on Bench: Before flight, test the system on a bench to ensure that the servos are moving as expected and the IMU data is being processed correctly.
 Calibration: Make sure the IMU is calibrated properly before using it in the rocket.
+
+Servo Initialization:
+
+The servo is initialized using the Servo library.
+The servo is attached to a specific pin (in this case, servoPin is 9), which is a PWM-capable pin on the Teensy 4.0.
+Mapping Control Output to Servo Angles:
+
+The output from your PID controller or Kalman filter will be in a range (e.g., -45 to +45 degrees for fin deflection).
+The servo expects input in the range of 0 to 180 degrees, so the output is mapped accordingly using the map() function.
+For example, a PID output of -45 would correspond to a servo angle of 45 (fully deflected one way), and +45 would correspond to 135 (fully deflected the other way).
+Servo Commands:
+
+The servo angle is updated in real-time using the servo.write() function. This sends the new angle to the servo, which adjusts the fins accordingly.
+Simulation:
+
+For demonstration purposes, the calculatePIDorKalmanOutput() function generates a simulated output (a sine wave) to move the servo. In your actual implementation, replace this with the output from your PID controller or Kalman filter.
